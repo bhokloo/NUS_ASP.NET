@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@using FirstMVC.Models;
+@model FirstMVC.Models.Employee 
+
+@{
+    var date = DateTime.Now;
+}
+@{
+    if (ViewBag.emp != null)
+    {
+        var a = ViewBag.emp;
+        var b = ViewData["indra"];
+        var b1 = ViewBag.maurya;
+        @: hello trying <br />
+        @b<br />
+        @b1<br />
+        <p>@a.Emp_Add</p><br />
+        <p>@a.Emp_Id</p><br />
+        <p>@a.Emp_Name</p><br />
+        <p>@goTo()</p><br />
+        <p>Hello this is text withHTML tags</p> <br />
+        @: Hello this is string without HTML tags<br />
+        @date;
+
+
+        @Model.Emp_Id
+        @Model.Emp_Name
+       
+    }
+}
+
+@functions{
+    string goTo()
+    {
+        return "Hello World";
+    }
+}
+
+
+@{
+    String[] names = new String[] { "indra", "maurya" };
+    foreach (string s in names)
+    {
+        @s
+    }
+
+    for (int i = 0; i < 2; i++)
+    {
+        @names[i];
+    }
+}
+
+<div class="jumbotron">
+    <strong>ASP.NET MVC</strong>
+</div>
+
+<tr class="form-group">
+    @using (Html.BeginForm())
+    {
+        <table align="center">
+            <tr>
+                <td align="center">
+                    @Html.Label("EmployeeID:")
+                    @Html.TextBox("Emp_Id")
+                </td>
+            </tr>
+
+            <tr>
+                <td align="center">
+                    @Html.Label("EmployeeName:")
+                    @Html.TextBox("Emp_Name")
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    @Html.Label("EmployeeAdd:")
+                    @Html.TextBox("Emp_Add")
+                </td>
+            </tr>
+
+            <tr>
+                <td align="center">
+                    <input type="submit" value="Submit" class="btn-primary" />
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    @ViewBag.Message
+                    @ViewBag.SucessMessage
+                </td>
+            </tr>
+
+        </table>
+    }

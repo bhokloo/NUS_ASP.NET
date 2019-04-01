@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@using FirstMVC.Models;
+@model FirstMVC.Models.ClientValidation
+
+@{
+    if (@Model != null)
+    {
+            @: username @Model.username; <br/>
+            @: gender : @Model.gender; <br/>
+            @: Password @Model.password; <br/>
+            @: COnfirm password :@Model.password; </br>
+            @: Accept : @Model.accept; <br/>
+            @: Country : @Model.countries;
+            
+            @Html.Partial("_HtmlHelper");  @*For Partial View*@
+
+    }
+}
+
+<div class="jumbotron">
+    <strong>ASP.NET MVC</strong>
+</div>
+
+<tr class="form-group">
+    @using (Html.BeginForm("clientsidevalidation", "Student", FormMethod.Post))
+    {
+        @Html.ValidationSummary(false,"",new { @class = "text-danger"})
+
+        <table>
+            <tr>
+                <td>@Html.LabelFor(x => x.username)</td>
+                <td>@Html.TextBoxFor(x => x.username)</td>
+                <td>@Html.ValidationMessageFor(x => x.username)</td>
+
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.password)</td>
+                <td>@Html.PasswordFor(x => x.password)</td>
+                <td>@Html.ValidationMessageFor(x => x.password)</td>
+
+            </tr>
+
+            <tr>
+                <td>@Html.LabelFor(x => x.confirm_password)</td>
+                <td>@Html.PasswordFor(x => x.confirm_password)</td>
+                <td>@Html.ValidationMessageFor(x => x.confirm_password)</td>
+                
+            </tr>
+
+            <tr>
+                <td>@Html.LabelFor(x => x.countries)</td>
+                <td>
+                    @Html.DropDownListFor(x => x.countries, new SelectList(
+                  new List<Object>{
+                       new { value = "china" , id = "China"  },
+                       new { value = "india" , id = "Cndia" },
+                       new { value = "brazil" , id = "Brazil"}
+                    },
+                  "value",
+                  "id",
+                   2))
+                </td>
+                <td>@Html.ValidationMessageFor(x => x.countries)</td>
+
+            </tr>
+
+
+            <tr>
+                <td>@Html.LabelFor(x => x.gender)</td>
+                <td>
+                    @Html.RadioButtonFor(x => x.gender, "M", new { id = "male" }) Male
+                    &nbsp;
+                    @Html.RadioButtonFor(x => x.gender, "F", new { id = "female" }) Female
+                </td>
+                <td></td>
+
+            </tr>
+
+            <tr>
+                <td>@Html.LabelFor(x => x.accept)</td>
+                <td>@Html.CheckBoxFor(x => x.accept)</td>
+
+                <td></td>
+
+            </tr>
+
+            <tr>
+
+                <td colspan="3"><input type="submit" value="Register"</td>
+
+            </tr>
+
+        </table>
+    }

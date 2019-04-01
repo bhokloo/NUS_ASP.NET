@@ -1,0 +1,63 @@
+﻿@*it is used if we use model in this cshtml page.*@
+@using FirstMVC.Models;
+
+
+@* Use this to auto populate the Entity fileds*@
+@model FirstMVC.Models.Entity
+
+@{
+    ViewBag.Title = "Contact";
+}
+
+
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+
+<html>
+<body>
+
+    <form action="GetDepartment3" method="post">
+        <table border="1">
+            <tr>
+                <td>
+                    Departname : <input type="text" name="department"><br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Course: <input type="text" name="course">
+
+                </td>
+            </tr>
+            <tr>
+                <td><input type="submit"></td>
+
+            </tr>
+        </table>
+
+    </form>
+
+    @{
+        Entity a = null;
+        if (ViewData["abc"] != null)
+        {
+            a = (Entity)ViewData["abc"];
+
+
+        }
+
+    }
+
+
+    @{ 
+        if (a != null)
+        {
+         @a.department;
+         @a.course;
+            }
+    }
+
+</body>
+
+</html>
