@@ -129,13 +129,22 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CookieAndSessionsController.cs" />
+    <Compile Include="Controllers\FilterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
-    <Compile Include="Filters\AuthenticationFilter.cs" />
+    <Compile Include="Controllers\ThreadController.cs" />
+    <Compile Include="Controllers\ValidationController.cs" />
+    <Compile Include="Controllers\XMLHttpRequestController.cs" />
+    <Compile Include="Filters\ActionFiltera.cs" />
+    <Compile Include="Filters\AuthenticationFilters.cs" />
     <Compile Include="Filters\Authorization.cs" />
+    <Compile Include="Filters\ExceptionFilter.cs" />
+    <Compile Include="Filters\ResultFIler.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\JsonBind.cs" />
     <Compile Include="Models\ServerValidation.cs" />
     <Compile Include="Models\Data.cs" />
     <Compile Include="Models\Demo.cs" />
@@ -191,9 +200,13 @@
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Home\ClientSideValidation.cshtml" />
     <Content Include="Views\Shared\_HtmlHelper.cshtml" />
-    <Content Include="Views\Student\ServerSideValidation.cshtml" />
+    <Content Include="Views\Filter\ServerSideValidation.cshtml" />
+    <Content Include="Views\XMLHttpRequest\json.cshtml" />
+    <Content Include="Views\CookieAndSessions\SessionView.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Thread\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

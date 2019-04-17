@@ -77,7 +77,7 @@ namespace FirstMVC.Controllers
         }
 
 
-        public ActionResult GetDepartment3() 
+        public ActionResult GetDepartment3(string a) 
         {
             //ViewData["abc"] = new Entity(); //HttpGet Method, passed the null object to bind the View with the refernce object.
           
@@ -90,6 +90,7 @@ namespace FirstMVC.Controllers
         public ActionResult GetDepartment3(Entity obj) //it holds the parameters values.
         {
             var reqA = Request["department"]; //request the department from POST BODY......Request.QueryString["course"]; will not work here
+            Debug.WriteLine("yes the request['departmen'] its taking from not form HTTP POST BODY and not from Enitity obj." + reqA);
             var reqB = Request["course"];
             Debug.WriteLine(reqA+""+reqB);
             ViewData["abc"] = obj; // this ViewData["obj"] = obj; carries the objects to bind it with the view...

@@ -26,7 +26,7 @@
 </div>
 
 <tr class="form-group">
-    @using (Html.BeginForm("serversidevalidation", "Student", FormMethod.Post))
+    @using (Html.BeginForm("ServerSideValidation321", "Validation", FormMethod.Post))
     {
 
         <table>
@@ -38,8 +38,10 @@
                         if (ViewBag.errDict != null)
                         {
                             string err;
-                            if (ViewBag.errDict.TryGetValue("username", out err))
+                          // if (ViewBag.errDict.TryGetValue("username", out err))
+                           if (ViewBag.errDict.ContainsKey("username"))
                             {
+                                    err = ViewBag.errDict["username"];
                               <span  class ="field-validation-error"> @err
                               </span>
                             }

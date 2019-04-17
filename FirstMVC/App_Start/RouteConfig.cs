@@ -39,7 +39,7 @@ namespace FirstMVC
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}/{id1}",
-                defaults: new { controller = "Home", action = "About", id = UrlParameter.Optional, id1= UrlParameter.Optional } // diff controllers should have same action if called only the controller without specifying the action...
+                defaults: new { controller = "Thread", action = "AsyncBar", id = UrlParameter.Optional, id1= UrlParameter.Optional } // diff controllers should have same action if called only the controller without specifying the action...
             );
 
 
