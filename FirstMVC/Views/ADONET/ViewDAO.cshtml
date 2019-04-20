@@ -1,0 +1,60 @@
+﻿@using FirstMVC.Models
+@model System.Data.DataTable
+@using System.Data
+<table>
+    @{
+        if (ViewBag.data != null)
+        {
+            foreach (var a in ViewBag.data)
+
+            {
+
+                <td>
+                    @a.customer_id
+                </td>
+
+                <td>
+                    @a.username
+                </td>
+
+                <td>
+                    @a.firstname
+                </td>
+
+                <td>
+                    @a.password
+                </td>
+
+            }
+        }
+    }
+</table>
+
+
+
+@{
+    if (Model != null)
+    {
+        //var grid = new WebGrid (ViewBag.ds);
+        //var grid = new WebGrid(Model);
+        //grid.Bind(ViewBag.ds, autoSortAndPage: false);
+        // grid.Pager(WebGridPagerModes.NextPrevious);
+        foreach (System.Data.DataColumn col in Model.Columns)
+        {
+            @col.Caption
+        }
+
+
+
+        @grid.GetHtml()
+
+
+    }
+
+
+}
+
+
+
+
+

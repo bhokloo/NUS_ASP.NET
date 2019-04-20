@@ -129,13 +129,18 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ADONETController.cs" />
     <Compile Include="Controllers\CookieAndSessionsController.cs" />
     <Compile Include="Controllers\FilterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LINQController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\ThreadController.cs" />
     <Compile Include="Controllers\ValidationController.cs" />
     <Compile Include="Controllers\XMLHttpRequestController.cs" />
+    <Compile Include="DAO\Dao.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Filters\ActionFiltera.cs" />
     <Compile Include="Filters\AuthenticationFilters.cs" />
     <Compile Include="Filters\Authorization.cs" />
@@ -144,6 +149,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DAOModelOfMyOwn.cs" />
     <Compile Include="Models\JsonBind.cs" />
     <Compile Include="Models\ServerValidation.cs" />
     <Compile Include="Models\Data.cs" />
@@ -203,8 +209,13 @@
     <Content Include="Views\Filter\ServerSideValidation.cshtml" />
     <Content Include="Views\XMLHttpRequest\json.cshtml" />
     <Content Include="Views\CookieAndSessions\SessionView.cshtml" />
+    <Content Include="Views\ADONET\ViewDAO.cshtml" />
+    <Content Include="Views\ADONET\CallSqlDataAdapter.cshtml" />
+    <Content Include="Views\ADONET\DisplayDataSet.cshtml" />
+    <Content Include="Views\ADONET\DisplayDataSetAndGridView.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\LINQ\" />
     <Folder Include="Views\Thread\" />
   </ItemGroup>
   <ItemGroup>

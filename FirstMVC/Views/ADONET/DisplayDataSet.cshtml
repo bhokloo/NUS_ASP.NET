@@ -1,0 +1,43 @@
+﻿
+@model System.Data.DataSet
+@using System.Data
+
+
+@{ 
+    if (Model != null)
+    {
+
+
+<table border="1">
+
+    <tr>
+
+        @foreach (DataColumn col in Model.Tables[0].Columns)
+        {
+            <th> @col</th>
+        }
+
+    </tr>
+
+            @foreach (DataRow rows in Model.Tables[0].Rows)
+            {
+            <tr>
+                <td>@rows["customer_id"]</td>
+                <td>@rows["username"]</td>
+                <td>@rows["firstname"]</td>
+                <td>@rows["password"]</td>
+                <td>@rows["session_id"]</td>
+                <td>@rows["lastname"]</td>
+            </tr>
+            }
+        
+
+    </table>
+        
+    }
+    }
+   
+
+
+
+

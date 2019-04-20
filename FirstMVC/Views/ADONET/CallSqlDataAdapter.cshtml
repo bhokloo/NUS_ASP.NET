@@ -1,0 +1,52 @@
+﻿
+@model System.Data.DataTable
+@using System.Data
+
+
+@{ 
+    if (Model != null)
+    {
+        //var grid = new WebGrid (ViewBag.ds);
+        //var grid = new WebGrid(Model);
+        //grid.Bind(ViewBag.ds, autoSortAndPage: false);
+        // grid.Pager(WebGridPagerModes.NextPrevious);
+
+      
+
+
+        <table border="1">
+
+            <tr>
+
+                @foreach(System.Data.DataColumn col in Model.Columns)
+                {
+                <th> @col.Caption </th>
+                }
+               
+            </tr>
+           
+                @foreach(System.Data.DataRow rows in Model.Rows)
+                {
+                    <tr>
+                    @foreach (var cell in rows.ItemArray)
+                    {
+                             <td>@cell.ToString()</td>
+                    }
+                    </tr>
+
+                }
+
+            
+                @*@foreach (DataRow row in Model.Tables["Marks"].Rows)
+                {
+                    @(row["Name"] + " " + row["Marks"])
+                }*@
+        </table>
+        
+    }
+    }
+   
+
+
+
+

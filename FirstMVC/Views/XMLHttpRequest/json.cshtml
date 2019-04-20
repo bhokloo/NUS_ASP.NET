@@ -7,6 +7,7 @@
 
 <div id="demo">
     <button type="button" onclick="loadXMLDocfromModel()">Change Content</button>
+    <button type="button" onclick="loadXMLDoc()">2 Change Content</button>
 </div>
 
 
@@ -30,7 +31,7 @@
     function loadXMLDocfromModel() {
         var xhr = new XMLHttpRequest(); // new XMLHttpRequest object..this object has special method called onreadystatechange which will process the reponse from server
         xhr.open("POST", "http://localhost:54976/XMLHttpRequest/jsonWithModel", true); //Asynchrouns = true or false.
-        http.setRequestHeader("Content-type", "application/json");
+        xhr.setRequestHeader("Content-type", "application/json");
 
         //var msg = {
         //    "name" : "indrajit",
@@ -45,10 +46,12 @@
         xhr.onreadystatechange = function () //onreadystatechange goes from 1,2,3 and 4..4 is complete..whenever the readystate state changes, onreadystatechange executes...
         {
             if (xhr.readyState == 4 && xhr.status == 200) { //status stores server response...the status are processing, downloading or completed
+                console.log(this.responseText)
                 document.getElementById("demo").innerHTML = this.responseText;
             }
         };
-        var data = JSON.stringify({ "name": "tomb@raider.com", "id": "LaraCroft" });
+        var data = { "name": "tomb@raider.com", "id": "LaraCroft" };
+       
         xhr.send(JSON.stringify(data));
         //thus the after send,  as its asynchronous, it gets response from server  which is stored in readystate..thus invoking onreadystatechange again
         //and again until it achieves the complete status which is 4....

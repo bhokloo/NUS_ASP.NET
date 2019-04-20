@@ -1,0 +1,100 @@
+﻿
+@using System.Data
+@model IEnumerable<FirstMVC.Models.DAOModelOfMyOwn>
+
+
+
+<form id="exportWebGrid" action="" method="post">
+    <div name="webView">
+        @{
+
+            var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 10);
+            grid.Pager(WebGridPagerModes.NextPrevious);
+
+        }
+
+
+
+        <div id="content">
+            @grid.GetHtml(
+            tableStyle: "webgrid-table",
+            headerStyle: "webgrid-header",
+            footerStyle: "webgrid-footer",
+            alternatingRowStyle: "webgrid-alternating-row",
+            rowStyle: "webgrid-row-style",
+            mode: WebGridPagerModes.All, //paging to grid
+            firstText: "<< First",
+            previousText: "< Prev",
+            nextText: "Next >",
+            lastText: "Last >>",
+                columns:grid.Columns(
+
+                             grid.Column(header:"Serial No", format:@<text><div>@(item.WebGrid.Rows.IndexOf(item) + 1)</div></text>),
+
+                             grid.Column(columnName: "customer_id", header: "customer_id"),
+                             grid.Column(columnName: "username", header: "username"),
+                             grid.Column(columnName: "firstname", header: "firstname"),
+                             grid.Column(columnName: "password", header: "password"),
+                             grid.Column(columnName: "session_id", header: "session_id"),
+                             grid.Column(columnName: "lastname", header: "lastname"),
+                             grid.Column(format:@<text><a href="" onclick="DeleteME('@item.customer_id')">Delete</a></text>)
+
+                      ))
+
+        </div>
+        <input id="Submit1" type="submit" value="Export to Excel" />
+</form>
+
+
+<style type="text/css">
+    /*Here we will add css for style webgrid*/
+    .webgrid-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 1.2em;
+        width: 100%;
+        display: table;
+        border-collapse: separate;
+        border: solid 1px #98BF21;
+        background-color: white;
+    }
+
+        .webgrid-table td, th {
+            border: 1px solid #98BF21;
+            padding: 3px 7px 2px;
+        }
+
+    .webgrid-header {
+        background-color: #A7C942;
+        color: #FFFFFF;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-alternating-row {
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+</style>
+
+
+<script>
+         function DeleteME(id)
+            {
+                debugger;
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://localhost:54976/ADONET/deleteMe',
+                    data:{
+                        customer_id:id
+                    }
+            }); 
+        }
+</script>

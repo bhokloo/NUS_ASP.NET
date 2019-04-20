@@ -1,10 +1,14 @@
 ﻿using FirstMVC.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Services;
 
 namespace FirstMVC.Controllers
 {
@@ -29,10 +33,11 @@ namespace FirstMVC.Controllers
         }
 
         [HttpPost]
-        public JsonResult jsonWithModel(String sessionId, JsonBind data)
+        public JsonResult jsonWithModel(JsonBind data)
         {
-            //object ob1 = new { id = "aaaa", msg = "hello" };
-            Debug.WriteLine("ffhhhh"+ sessionId +","+ data.name);
+           
+            Debug.WriteLine(","+ data.name);
+
             return Json(data);
 
         }
