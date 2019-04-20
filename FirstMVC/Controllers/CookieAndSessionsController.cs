@@ -12,6 +12,73 @@ namespace FirstMVC.Controllers
     {
         //___________________________SESSIONS AND COOKIE___________________________________________________________
 
+        //CHER WAH
+        public ActionResult SessionView()
+        {
+            //var b = Session["ASP.NET_SessionId"];
+            var a = Request.Cookies["ASP.NET_SessionId"].Value.ToString(); // Default Cookie...
+            var aa = Session["sessionIdname"];
+            Debug.WriteLine( a + "  --  " + aa );
+            return View();
+        }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult Login(string username)
+        {
+            if (username == null)
+                return View();
+
+            if (Session[username] != null)
+                return View();
+
+            string sessionId = Guid.NewGuid().ToString();
+            Session[username] = sessionId;
+            Session[sessionId] = username;
+            Session[sessionId + "_run"] = new List<string>();
+
+            return RedirectToAction("Track", new { sessionId = sessionId });
+        }
+
+
+        public ActionResult Track(string sessionId, string cmd, string history)
+        {
+
+            ViewData["sessionId"] = sessionId;
+
+            if (cmd == "Get")
+            {
+                List<string> running = (List<string>)Session[sessionId + "_run"];
+                ViewData["history"] = String.Join(", ", running.ToArray());
+                return View();
+            }
+
+            if (cmd == "Logout")
+            {
+                string username = (string)Session[sessionId];
+                Session[username] = null;
+                Session[sessionId + "_run"] = null;
+                return View("login");
+            }
+            else
+            {
+                List<string> list = (List<string>)Session[sessionId + "_run"];
+                if (cmd != null)
+                    list.Add(cmd);
+            }
+
+            ViewData["history"] = history;
+            return View();
+        }
+
+
+
+
         //CREATING COOKIES
         public ActionResult GetSession()
         {
@@ -53,10 +120,7 @@ namespace FirstMVC.Controllers
         }
 
 
-        public ActionResult SessionView()
-        {
-            return View();
-        }
+       
 
         [HttpPost]
         public ActionResult SessionView(string msg)

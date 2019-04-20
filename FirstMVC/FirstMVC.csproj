@@ -213,6 +213,8 @@
     <Content Include="Views\ADONET\CallSqlDataAdapter.cshtml" />
     <Content Include="Views\ADONET\DisplayDataSet.cshtml" />
     <Content Include="Views\ADONET\DisplayDataSetAndGridView.cshtml" />
+    <Content Include="Views\CookieAndSessions\Track.cshtml" />
+    <Content Include="Views\CookieAndSessions\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\LINQ\" />

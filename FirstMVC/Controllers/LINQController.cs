@@ -157,9 +157,24 @@ namespace FirstMVC.Controllers
             }
 
 
+            int[] num1 = { 0, 1, 2, 3, 4  };
+            int[] num2 = { 5, 6, 7, 8, 9 };
+
+            var dcd = from n in num1
+                      from nn in num2
+                      where n * nn > 20
+                      select new { n, nn };
+
+            foreach (var sd in dcd)
+            {
+                Debug.WriteLine(sd.n +","+ sd.nn);
+            }
+
+
+
             //______________LINQ in MODEL CLASS_________________________________________________
 
-            List<Demo> demoer = new List<Demo> {
+            List < Demo > demoer = new List<Demo> {
 
                     new Demo() {name ="indrajit", age = 12 },
                     new Demo() {name ="Maurya", age =  13 }
@@ -168,7 +183,8 @@ namespace FirstMVC.Controllers
             var demoas = from demos in demoer
                          where demos.age > 10 //or where demos.age == demoer.Min(x => x.age)
                          orderby demos.age
-                         select new { demos }; 
+                         select new { demos.age,demos.name }; 
+                         //select new { demos }; //Passing only object then in Debug we speicfy saa.demos.age
             
             //Or You CAN sue the syntax below
             var demovar = demoer.Where(x => x.age > 10).OrderBy(x => x.age).Select(x => x.name);
@@ -176,68 +192,76 @@ namespace FirstMVC.Controllers
 
             foreach (var saa in demoas)
             {
-                Debug.WriteLine("&&&&&&&&&&&&&&& " + saa.demos.age); //OP :&&&&&&&&&&&&&&& { name = indrajit, age = 12 }
-                                                                     //    &&&&&&&&&&&&&& & { name = Maurya, age = 13 }
-                                                                     //Debug.WriteLine("&&&&&&&&&&&&&&& "+saa.age);
-
+                    Debug.WriteLine(saa);   //OP :&&&&&&&&&&&&&&& { name = indrajit, age = 12 }
             }
 
 
+            //______________BUILT IN AGGREGATE FUNCTIONS IN LINQ using MODEl CLASS_________________________________________________
 
-            ////______________BUILT IN AGGREGATE FUNCTIONS IN LINQ using MODEl CLASS_________________________________________________
+            List<Demo> demo1 = new List<Demo> {
 
-            //List<Demo> demo1 = new List<Demo> {
+                new Demo() {name ="indrajit", age = 13, gender = 'M' },
+                new Demo() {name ="Maurya", age =  13, gender = 'M'},
+                new Demo() {name ="Kanojia", age =  133, gender = 'F'}
+            };
 
-            //    new Demo() {name ="indrajit", age = 12, gender = 'M' },
-            //    new Demo() {name ="Maurya", age =  13, gender = 'M'},
-            //    new Demo() {name ="Kanojia", age =  133, gender = 'F'}
-            //};
-            //foreach (var xyz in demo1)
-            //{
-            //    Debug.WriteLine(xyz.age +"=="+ xyz.name);
-            //}
+            var minage = demo1.Min(x => x.age); //find minimum number of age of objects...
+            var maxage = demo1.Max(x => x.age); //find maximum age of objects.
+            var SumOFAges = demo1.Sum(x => x.age); //calculates age of all objects...
+            var average = Convert.ToInt32(demo1.Average(x => x.age)); //Convert.ToInt32 removes the decimal part...find average of age of all objects.
+            var count = demo1.Count(); //counts the number of objects..
 
-            //var minage = demo1.Min(x => x.age);
-            //var maxage = demo1.Max(x => x.age);
-            //var count = demo1.Sum(x => x.age);
-            //var average = Convert.ToInt32(demo1.Average(x => x.age));
-            //var sum = demo1.Count();
-
-            //Debug.WriteLine(minage +"--"+ maxage + "--" + count + "--" + average + "--" + sum);
-
-            ////___________________FIND THE AGE OF YOUNGEST (Query Syntax + Method Syntax in one quest)________________
-
-            //var findyoung = from findyoungest in demo1
-            //                where findyoungest.age > demo1.Min(x => x.age)
-            //                select findyoungest.name;
-
-            //foreach (var dk in findyoung)
-            //{
-            //    Debug.WriteLine(dk);
-            //}
+            Debug.WriteLine(minage + "--" + maxage + "--" + SumOFAges + "--" + average + "--" + count);
 
 
-            ////___________________Ordering and Grouping________________
+            //___________________FIND THE AGE,NAME OF YOUNGEST (Query Syntax + Method Syntax in one quest)________________
 
-            //var finda = from find in demo1
-            //            where find.age > 10
-            //            orderby find.age
-            //            group find by find.gender;
+            var findyoung = from findyoungest in demo1
+                            where findyoungest.age == demo1.Min(x => x.age)
+                            select new { findyoungest.name,findyoungest.gender };
+
+            foreach (var dk in findyoung)
+            {
+                Debug.WriteLine(dk); //OP :  { name = indrajit, gender = M }
+            }
 
 
-            //// OR
+            //*************_____OTHER LINQ Methods_____************
 
-            //var findaOtherway = demo1.OrderBy(x => x.name).GroupBy(x => x.gender);
+            // .Single() // return a single
+            // .SingleOrDefault() // return a single or the default value if there are no matches
+            // .First() // return the first object it encounters that matches
+            // .FirstOrDefault() // return the first object it encounters that matches, or the default value if no matches
 
 
-            //foreach (var dka in finda)
-            //{
-            //    Debug.WriteLine("GROUP BY and ORDER by " + dka.Key +"==="+ dka.Count());
-            //    foreach (var bz in dka)
-            //    {
-            //        Debug.WriteLine(bz.name);
-            //    }
-            //}
+            //___________________Ordering and Grouping________________
+
+            var finda = from find in demo1
+                        where find.age > 10
+                        orderby find.age
+                        group find by find.gender; //here group by provides a KEY......
+
+
+            // OR
+
+            var findaOtherway = demo1.OrderBy(x => x.name).GroupBy(x => x.gender);
+
+
+            foreach (var dka in finda)
+            {
+
+                Debug.WriteLine("GROUP BY and ORDER by " + dka.Key + "===" + dka.Count());
+                foreach (var bz in dka)
+                {
+                    Debug.WriteLine(bz.name +" == "+ bz.gender +" == "+bz.age);
+                }
+                                                                                        /* OP:
+                                                                                        GROUP BY and ORDER by M=== 2
+                                                                                        indrajit == M == 13
+                                                                                        Maurya == M == 13
+                                                                                        GROUP BY and ORDER by F=== 1
+                                                                                        Kanojia == F == 133 */
+            }
 
 
             return null;

@@ -1,18 +1,49 @@
 ﻿
 @{
-	ViewBag.Title = "About";
+    ViewBag.Title = "About";
 }
 <h2>@ViewBag.Title</h2>
 <h3>@ViewBag.Message</h3>
 
 
 @using FirstMVC.Models;
-	@{
-		var d = (Data)ViewData["data"];
-	}
+@{
+    var d = (Data)ViewData["data"];
+}
 
-	@d.Greeting;
-	@d.From;
+@d.Greeting;
+@d.From;
 
 
 
+@*<table border=1>
+    <tr>
+        <th>Book Id</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Year Published</th>
+    </tr>
+
+    @foreach (var book in list)
+    {
+        string style = "";
+        string title = book.Title;
+        if (book.YearPublished >= 2010)
+        {
+            style = "font-weight: bold";
+        }
+
+        <tr>
+            <td>@book.BookId</td>
+            <td style='@style'>@title</td>
+            <td>@book.Author</td>
+            <td>@book.YearPublished</td>
+        </tr>
+    }
+</table>
+
+<style>
+    tr, th, td {
+        padding: 5px
+    }
+</style>*@

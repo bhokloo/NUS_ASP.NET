@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Track";
+}
+
+<h2>Track</h2>
+
+@{ 
+    var sessionId = ViewData["sessionId"];
+    var history = (string) ViewData["history"];
+}
+
+<form method="post">
+    <table>
+        <tr>
+            <td><input value="@sessionId"/></td>
+            <td><button type="submit" formaction="Track?cmd=Logout">Logout</button></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <button type="submit" formaction="Track?cmd=0">Home</button>
+                <button type="submit" formaction="Track?cmd=1">About</button>
+                <button type="submit" formaction="Track?cmd=2">Contact</button>
+            </td>
+        </tr>
+        <tr>
+            <td><input name="history" value='@history'/></td>
+            <td><button type="submit" formaction="Track?cmd=Get">Get</button></td>
+        </tr>
+    </table>
+    <input type="hidden" name="sessionId" value='@sessionId' />
+</form>
